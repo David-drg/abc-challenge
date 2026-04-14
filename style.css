@@ -1,58 +1,96 @@
-body {
-  font-family: Arial, sans-serif;
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
-  text-align: center;
-  background-color: #12f8d9;
+  padding: 0;
 }
 
+/* ============================================================
+   BASE
+   ============================================================ */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #12f8d9;
+  min-height: 100vh;
+}
 
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 nav {
   background: #0b3c49;
   color: white;
-  padding: 15px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+nav h2 {
+  font-size: clamp(16px, 4vw, 24px);
+  margin: 0;
+}
 
+nav div {
+  font-size: clamp(13px, 3vw, 16px);
+}
+
+/* ============================================================
+   FILTROS
+   ============================================================ */
 .filtros {
-  margin: 20px;
+  margin: 20px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 
 button {
   padding: 10px 15px;
-  margin: 5px;
   border: none;
   background: #0b3c49;
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  font-size: clamp(13px, 2.5vw, 15px);
+  transition: background 0.2s, color 0.2s;
 }
 
 button:hover {
   background: #f5f5f5;
-   color: #0b3c49;
+  color: #0b3c49;
 }
 
-
+/* ============================================================
+   CONTENEDOR DE CARTAS
+   ============================================================ */
 .contenedor {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
+  padding: 10px 16px 30px;
 }
 
-
+/* ============================================================
+   CARTA (flip card)
+   ============================================================ */
 .card {
-  width: 120px;
-  height: 160px;
+  width: clamp(90px, 22vw, 120px);
+  height: clamp(120px, 28vw, 160px);
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
-  cursor: pointer;;
-  color: #0b3c49
+  cursor: pointer;
+  color: #0b3c49;
+  flex-shrink: 0;
 }
-
 
 .card.volteada {
   transform: rotateY(180deg);
@@ -71,6 +109,12 @@ button:hover {
   align-items: center;
   flex-direction: column;
   background: white;
+  padding: 6px;
+}
+
+.card-frente h1 {
+  font-size: clamp(28px, 8vw, 42px);
+  margin: 0;
 }
 
 .card-dorso {
@@ -78,13 +122,67 @@ button:hover {
 }
 
 .card img {
-  width: 60px;
+  width: clamp(44px, 12vw, 60px);
+  height: clamp(44px, 12vw, 60px);
+  object-fit: contain;
 }
 
+.card-dorso h3 {
+  font-size: clamp(11px, 3vw, 14px);
+  margin-top: 6px;
+  text-align: center;
+}
 
+/* ============================================================
+   SECCIÓN EQUIPO
+   ============================================================ */
 .equipo {
   margin-top: 40px;
   padding: 20px;
   background: #0b3c49;
   color: #f5f5f5;
+}
+
+.equipo h2 {
+  font-size: clamp(18px, 4vw, 24px);
+  margin-bottom: 10px;
+}
+
+.equipo p {
+  font-size: clamp(13px, 3vw, 16px);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Móvil pequeño (≤ 360px): 3 cartas por fila */
+@media (max-width: 360px) {
+  .card {
+    width: calc(33.33% - 12px);
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Tablet (≥ 600px): cartas un poco más grandes */
+@media (min-width: 600px) {
+  .contenedor {
+    gap: 14px;
+    padding: 14px 24px 36px;
+  }
+}
+
+/* Desktop (≥ 1024px): tamaño fijo cómodo */
+@media (min-width: 1024px) {
+  .card {
+    width: 120px;
+    height: 160px;
+  }
+
+  .card img {
+    width: 60px;
+    height: 60px;
+  }
 }
